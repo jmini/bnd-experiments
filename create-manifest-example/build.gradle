@@ -1,0 +1,44 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'biz.aQute.bnd:biz.aQute.bnd.gradle:4.2.0'
+  }
+}
+
+plugins {
+    id 'java'
+    id 'biz.aQute.bnd.builder' version '4.2.0'
+}
+
+wrapper {
+    gradleVersion = '5.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+jar {
+    bnd ('Bundle-Name': 'fr.jmini.bnd.simple',
+         'Private-Package': 'fr.jmini.bnd.simple.internal',
+         'Bundle-Vendor': 'Jmini',
+         'Bundle-Description': 'Simple Experiment Bundle',
+         'Bundle-DocURL': 'https://www.jmini.fr')
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testImplementation "org.assertj:assertj-core:$assertjVersion"
+
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+
+test {
+    useJUnitPlatform()
+}
