@@ -1,0 +1,24 @@
+-standalone: ../_index/target/index.xml
+
+## Eclipse Equinox
+-runfw: org.eclipse.osgi
+-runproperties.equinox: osgi.console=, osgi.console.enable.builtin=false
+
+-runee: JavaSE-1.8
+-runprovidedcapabilities: ${native_capability}
+
+-resolve.effective: active; skip:="osgi.service"
+
+-runrequires: \
+        bnd.identity;id=fr.jmini.effectiveosgi.hello
+
+# This blacklist is used to obtain a stable resolve.
+# The packages should be supplied by the ConfigAdmin
+# and SCR implemementation bundles.
+-runblacklist: \
+    bnd.identity;id=org.osgi.service.cm,\
+    bnd.identity;id=org.osgi.service.component
+
+-runbundles: \
+	fr.jmini.effectiveosgi.hello;version='[1.0.0,1.0.1)',\
+	org.apache.felix.scr;version='[2.0.14,2.0.15)'

@@ -1,0 +1,14 @@
+== Effective OSGi Example
+
+This projects shows how an Equinox based application can be built using a maven-only approach (without tycho).
+
+This is based on the https://github.com/effectiveosgi/maven-archetypes[effective-osgi maven archetypes].
+
+This project is the result of the execution of following archetypes:
+
+* `eosgi-project-archetype:0.0.5`
+* `eosgi-module-archetype:0.0.5`
+* `eosgi-test-module-archetype:0.0.5`
+
+With some additional changes (to use Equinox instead of Felix) and cleanups.
+
