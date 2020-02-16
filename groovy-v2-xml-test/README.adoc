@@ -1,0 +1,5 @@
+== groovy-v2-xml-test
+
+Simple project containing a single unit test using the groovy xml library (version 2.5.9): `org.codehaus.groovy:groovy-xml:2.5.9`.
+
+The same test with version using version 3.0.0 of groovy is broken. See link:../groovy-v3-xml-test/[groovy-v3-xml-test]
