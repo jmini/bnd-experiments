@@ -50,3 +50,5 @@ Similar question on stackoverflow:
 link:https://stackoverflow.com/questions/60224686/osgi-tests-no-longer-working-after-upgrading-from-groovy-2-5-to-groovy-3-0[OSGi tests no longer working after upgrading from Groovy 2.5 to Groovy 3.0]
 
 The same test with version using version 2.5.9 of groovy is working. See link:../groovy-v2-xml-test/[groovy-v2-xml-test]
+
+Based on this example, issue link:https://issues.apache.org/jira/browse/GROOVY-9402[GROOVY-9402] was raised.

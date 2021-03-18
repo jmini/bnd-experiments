@@ -19,9 +19,17 @@ Jeremie Bresson
 Project to experiment with Bnd.
 //end::header[]
 
-//== Project Homepage
-//
-//Visit the link:{homepage}[project home page] to know more this project.
+//tag::description[]
+== Description
+
+This repository contains several projects that are my experiments with link:https://bnd.bndtools.org/[Bnd] and with other projects using those tools.
+
+* Effective OSGi Example: projects inside link:effectiveosgi-example/[effectiveosgi-example] folder were created using sevreal archetypes.
+* Issue with Groovy `3.0.0` (link:https://issues.apache.org/jira/browse/GROOVY-9402[GROOVY-9402])
+** Project link:groovy-v3-xml-test/[groovy-v3-xml-test] shows an issue with the OSGi metadata with Groovy `3.0.0`.
+** Project link:groovy-v2-xml-test/[groovy-v2-xml-test] is similar to `groovy-v3-xml-test` but using an older version of Groovy (to show the regression).
+
+//end::description[]
 
 //tag::contact-section[]
 == Get in touch
