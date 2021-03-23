@@ -15,3 +15,14 @@ mvn org.apache.maven.plugins:maven-archetype-plugin:3.0.1:generate -B \
       -Dversion=1.0.0-SNAPSHOT \
       -Dpackage=fr.jmini.bnd.enroutexample
 ----
+
+Resolving step:
+
+Inside the `enroutexample` folder:
+
+[source]
+----
+mvn -pl app -am bnd-indexer:index \
+      bnd-indexer:index@test-index \
+      bnd-resolver:resolve package
+----

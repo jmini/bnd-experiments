@@ -7,3 +7,6 @@ index: target/index.xml;name="app"
 -runee: JavaSE-1.8
 
 -resolve.effective: active
+-runbundles: \
+	fr.jmini.bnd.impl;version='[1.0.0,1.0.1)',\
+	org.apache.felix.scr;version='[2.1.10,2.1.11)'
