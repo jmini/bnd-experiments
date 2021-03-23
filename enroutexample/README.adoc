@@ -1,0 +1,17 @@
+== OSGi enRoute Quick Start
+
+These projects were created according to the link:https://enroute.osgi.org/tutorial/020-tutorial_qs.html[OSGi enRoute Quick Start] Guide.
+
+Creation step:
+
+[source]
+----
+mvn org.apache.maven.plugins:maven-archetype-plugin:3.0.1:generate -B \
+      -DarchetypeGroupId=org.osgi.enroute.archetype \
+      -DarchetypeArtifactId=project \
+      -DarchetypeVersion=7.0.0 \
+      -DgroupId=fr.jmini.bnd \
+      -DartifactId=enroutexample \
+      -Dversion=1.0.0-SNAPSHOT \
+      -Dpackage=fr.jmini.bnd.enroutexample
+----
