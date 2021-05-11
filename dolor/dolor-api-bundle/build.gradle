@@ -1,0 +1,3 @@
+dependencies {
+    compileOnly 'org.osgi:osgi.annotation:7.0.0'
+}

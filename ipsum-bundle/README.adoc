@@ -1,0 +1,14 @@
+== Ipsum bundle
+
+The ipsum bundle shows how how link:http://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.component.html#service.component-component.annotations[OSGi Component Annotations] such as `@Component` or link:https://docs.osgi.org/specification/osgi.core/7.0.0/framework.api.html#org.osgi.annotation.bundle[OSGi Bundle Annotations] such as `@Export` in `package-info.java` can be used to control the generated `MANIFEST.MF`.
+
+Like the link:../lorem-bundle/[Lorem Bundle] the idea is to have few java classes that are almost empty (using again `System.out.println(..)` calls to track the lifecycle of the bundle).
+
+The link:build.gradle[build.gradle] file configures Gradle to use the link:https://github.com/bndtools/bnd/blob/master/biz.aQute.bnd.gradle/README.md[Bnd Gradle Plugin] to generate the `MANIFEST.MF` in the produced jar.
+
+In addition inspired by the ability of Gradle to have link:https://docs.gradle.org/6.8.3/userguide/java_testing.html#sec:configuring_java_integration_tests[integration tests] in the same gradle module, the link:build.gradle[build.gradle] file introduces a new source set called `osgiTest` and some new configurations (`osgiTestCompileOnly`, `osgiTestImplementation` and `osgiTestRuntimeOnly`) to define tests that require to be executed inside an OSGi runtime.
+
+In other words we have two kinds of tests in this bundle:
+
+* `src/test/java`: simple JUnit tests, that are executed without OSGi (ideal to test a single method)
+* `src/osgi-test/java`: tests that are executed inside an OSGi context. The JUnit 5 Extensions from link:https://github.com/osgi/osgi-test[OSGi Testing Support] project are used to write them. Check for example the `@ExtendWith(..)` annotation at the top of the test classes.

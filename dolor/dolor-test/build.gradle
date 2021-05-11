@@ -1,0 +1,27 @@
+dependencies {
+    implementation project(':dolor-api-bundle')
+    runtimeOnly project(':dolor-bundle')
+
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    runtimeOnly 'org.junit.platform:junit-platform-launcher:1.7.0'
+
+    implementation 'org.osgi:org.osgi.test.junit5:0.9.0'
+    implementation 'org.eclipse.platform:org.eclipse.osgi:3.15.100'
+    runtimeOnly 'org.apache.felix:org.apache.felix.scr:2.1.20'
+    runtimeOnly 'org.osgi:org.osgi.util.function:1.1.0'
+    runtimeOnly 'org.osgi:org.osgi.util.promise:1.1.1'
+}
+
+def resolve = tasks.register('resolve', aQute.bnd.gradle.Resolve) {
+    bndrun = 'test.bndrun'
+}
+
+def testOSGi = tasks.register('testOSGi', aQute.bnd.gradle.TestOSGi) {
+    dependsOn resolve
+    bndrun = 'test.bndrun'
+}
+
+tasks.named('check') {
+    dependsOn testOSGi
+}

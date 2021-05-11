@@ -1,0 +1,4 @@
+dependencies {
+    api project(':dolor-api-bundle')
+    compileOnly 'org.osgi:org.osgi.service.component.annotations:1.4.0'
+}

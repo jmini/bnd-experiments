@@ -1,0 +1,7 @@
+== Lorem bundle
+
+Probably the simplest bundle you can create.
+
+It contains a simple link:src/main/java/fr/jmini/bnd/lorem/Activator.java[Activator.java] that just print some lines (using `System.out.println(..)`) when the bundle is started or stopped.
+
+The link:build.gradle[build.gradle] file configures Gradle to use the link:https://github.com/bndtools/bnd/blob/master/biz.aQute.bnd.gradle/README.md[Bnd Gradle Plugin] to generate the `MANIFEST.MF` in the produced jar.

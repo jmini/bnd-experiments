@@ -1,0 +1,5 @@
+rootProject.name = 'dolor-projects'
+
+include 'dolor-api-bundle'
+include 'dolor-bundle'
+include 'dolor-test'

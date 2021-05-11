@@ -1,0 +1,15 @@
+== Dolor bundles
+
+The dolor bundles are similar to the link:../ipsum-bundle/[Ipsum Bundle] but separated into multiple bundles:
+
+* `dolor-api-bundle`
+* `dolor-bundle`
+* `dolor-test`
+
+Having the api in a separated bundle allows to call a service from the code that starts the OSGi runtime.
+This uses the `org.osgi.framework.system.packages.extra` configuration when the OSGi runtime is started.
+See also this link:https://stackoverflow.com/questions/18295784/how-to-call-one-of-the-methods-in-my-bundle-a-jar-file-after-it-has-been-install[stackoverflow question].
+
+The test bundle contains the tests that needs to be executed inside an OSGi context.
+The JUnit 5 Extensions from link:https://github.com/osgi/osgi-test[OSGi Testing Support] project are used to write them.
+Check for example the `@ExtendWith(..)` annotation at the top of the test classes.
