@@ -1,0 +1,47 @@
+plugins {
+    id 'java-library'
+    id 'biz.aQute.bnd.builder' version '6.1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://raw.githubusercontent.com/jmini/ecentral/HEAD/repo'
+    }
+}
+
+dependencies {
+    api platform(libs.eclipse.platform.dependencies)
+    implementation 'org.eclipse.platform:org.eclipse.osgi'
+    implementation 'org.eclipse.pde:org.eclipse.pde.core'
+    
+    runtimeOnly 'com.ibm.icu:icu4j:64.2'
+    runtimeOnly 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.javax-inject:1_3'
+    runtimeOnly 'org.eclipse.platform:org.eclipse.equinox.security'
+    runtimeOnly 'org.eclipse.platform:org.eclipse.equinox.frameworkadmin.equinox'
+    runtimeOnly 'org.eclipse.platform:org.eclipse.equinox.simpleconfigurator'
+    runtimeOnly 'org.eclipse.platform:org.eclipse.osgi.services'
+
+    implementation libs.junit.jupiter.api
+    runtimeOnly libs.junit.jupiter.engine
+    runtimeOnly libs.junit.platform.launcher
+    implementation libs.assertj.core
+
+    implementation libs.org.osgi.test.junit5
+    runtimeOnly libs.org.apache.felix.scr
+    runtimeOnly libs.org.osgi.util.function
+    runtimeOnly libs.org.osgi.util.promise
+}
+
+def resolve = tasks.register('resolve', aQute.bnd.gradle.Resolve) {
+    bndrun = project.file('test.bndrun')
+}
+
+def testOSGi = tasks.register('testOSGi', aQute.bnd.gradle.TestOSGi) {
+    dependsOn resolve
+    bndrun = project.file('test.bndrun')
+}
+
+tasks.named('check') {
+    dependsOn testOSGi
+}
