@@ -26,7 +26,7 @@ This repository contains several projects that are my experiments with link:http
 
 * Experiments with the link:https://github.com/bndtools/bnd/blob/master/biz.aQute.bnd.gradle/README.md[Bnd Gradle Plugin] used in non-Bnd Workspace Builds.
 ** link:lorem-bundle/[Lorem bundle] a simple bundle
-** link:ipsum-bundle/[Ipsum bundle] a bundle that uses annotations `(`@Component`, `@Export`)
+** link:ipsum-bundle/[Ipsum bundle] a bundle that uses annotations (`@Component`, `@Export`)
 ** link:dolor/[Dolor bundles] different bundles to split api, implementation and test.
 * Effective OSGi Example: projects inside link:effectiveosgi-example/[effectiveosgi-example] folder were created using sevreal archetypes.
 * Issue with Groovy `3.0.0` (link:https://issues.apache.org/jira/browse/GROOVY-9402[GROOVY-9402])
