@@ -29,6 +29,7 @@ This repository contains several projects that are my experiments with link:http
 ** link:lorem-bundle/[Lorem bundle] a simple bundle
 ** link:ipsum-bundle/[Ipsum bundle] a bundle that uses annotations (`@Component`, `@Export`)
 ** link:dolor/[Dolor bundles] different bundles to split api, implementation and test.
+* link:slf4j-experiment/[slf4j experiment] to test usage of SLF4J in an OSGi bundle
 * Effective OSGi Example: projects inside link:effectiveosgi-example/[effectiveosgi-example] folder were created using sevreal archetypes.
 * Issue with Groovy `3.0.0` (link:https://issues.apache.org/jira/browse/GROOVY-9402[GROOVY-9402])
 ** Project link:groovy-v3-xml-test/[groovy-v3-xml-test] shows an issue with the OSGi metadata with Groovy `3.0.0`.

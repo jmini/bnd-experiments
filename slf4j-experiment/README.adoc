@@ -1,0 +1,3 @@
+== SLF4J Experiment
+
+The this bundle has a dependency on `slf4j-api` (and at runtime on `slf4j-simple` to satisfies the constraints).

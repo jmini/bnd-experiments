@@ -1,0 +1,117 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'biz.aQute.bnd.builder' version '5.3.0'
+    id 'com.diffplug.spotless' version '5.1.1'
+}
+
+wrapper {
+    gradleVersion = '6.8.3'
+}
+
+group = 'fr.jmini.slf4j'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    osgiTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+        java {
+            srcDirs = [ 'src/osgi-test/java' ]
+        }
+        resources {
+            srcDirs = [ 'src/osgi-test/resources' ]
+        }
+    }
+}
+
+configurations {
+    testCompileOnly.extendsFrom compileOnly
+    osgiTestCompileOnly.extendsFrom compileOnly
+    osgiTestImplementation.extendsFrom implementation
+    osgiTestRuntimeOnly.extendsFrom runtimeOnly
+}
+
+dependencies {
+    compileOnly 'org.osgi:osgi.annotation:7.0.0'
+    compileOnly 'org.osgi:org.osgi.service.component.annotations:1.3.0'
+
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    osgiTestImplementation 'org.osgi:org.osgi.test.junit5:0.9.0'
+    osgiTestImplementation 'org.eclipse.platform:org.eclipse.osgi:3.15.100'
+    osgiTestRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.7.0'
+    osgiTestRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    osgiTestRuntimeOnly 'org.apache.felix:org.apache.felix.scr:2.1.20'
+    osgiTestRuntimeOnly 'org.osgi:org.osgi.util.function:1.1.0'
+    osgiTestRuntimeOnly 'org.osgi:org.osgi.util.promise:1.1.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+def testingBundle = tasks.register('testingBundle', aQute.bnd.gradle.Bundle) {
+    archiveClassifier = 'tests'
+    from sourceSets.osgiTest.output
+    sourceSet = sourceSets.osgiTest
+
+    bnd """\
+Bundle-SymbolicName: \${task.archiveBaseName}-\${task.archiveClassifier}
+Test-Cases: \${classes;HIERARCHY_INDIRECTLY_ANNOTATED;org.junit.platform.commons.annotation.Testable;CONCRETE}
+"""
+}
+
+def resolve = tasks.register('resolve', aQute.bnd.gradle.Resolve) {
+    bundles = files(sourceSets.osgiTest.runtimeClasspath, configurations.archives.artifacts.files)
+    bndrun = 'test.bndrun'
+}
+
+def testOSGi = tasks.register('testOSGi', aQute.bnd.gradle.TestOSGi) {
+    dependsOn resolve
+    bundles = files(sourceSets.osgiTest.runtimeClasspath, configurations.archives.artifacts.files)
+    bndrun = 'test.bndrun'
+}
+
+tasks.named('check') {
+    dependsOn testOSGi
+}
+
+artifacts {
+    archives testingBundle
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+spotless {
+  java {
+    importOrder 'java', 'javax', 'org', 'com', ''
+    removeUnusedImports()
+
+    // available versions are: https://github.com/diffplug/spotless/tree/master/lib-extra/src/main/resources/com/diffplug/spotless/extra/eclipse_jdt_formatter
+    eclipse('4.13.0').configFile('.settings/org.eclipse.jdt.core.prefs')
+  }
+}
