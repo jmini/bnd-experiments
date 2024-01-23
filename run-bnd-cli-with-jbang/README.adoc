@@ -1,0 +1,65 @@
+== Run BND cli with JBang
+
+https://bnd.bndtools.org/[`bnd`] is a command line tool.
+
+It is published on Maven Central:
+
+[source, xml]
+----
+<dependency>
+    <groupId>biz.aQute.bnd</groupId>
+    <artifactId>biz.aQute.bnd</artifactId>
+    <version>${bnd-version}</version>
+</dependency>
+---
+
+
+=== First example with jbang and version 6.4.0
+
+So it is possible to run it with https://www.jbang.dev/[jbang]:
+
+[source, shell]
+----
+jbang biz.aQute.bnd:biz.aQute.bnd:6.4.0 version
+----
+
+Will print:
+----
+[jbang] Resolving dependencies...
+[jbang]    biz.aQute.bnd:biz.aQute.bnd:6.4.0
+[jbang] Dependencies resolved
+6.4.0.202211291949
+----
+
+After the first run you will not even have the `[jbang]` lines.
+
+
+=== Using the latest released bnd version
+
+Instead of hard-coding the `bnd` version, it is possible to use the `RELEASE` meta-version.
+
+So with a more interesting command (inspired by this https://stackoverflow.com/a/54445914[stackoverflow response]):
+
+[source, shell]
+----
+jbang biz.aQute.bnd:biz.aQute.bnd:RELEASE repo --workspace ./repolist.bndrun list
+----
+
+This will list the bundles available on the update site mentioned in the `repolist.bndrun` file
+
+
+=== Create a jbang alias
+
+If you need this more often, you can even create an alias pointing to the latest version:
+
+[source, shell]
+----
+jbang alias add --name bnd biz.aQute.bnd:biz.aQute.bnd:RELEASE
+----
+
+Then `jbang bnd version` will return (at time of writing):
+
+[source, shell]
+---
+6.4.0.202211291949
+---

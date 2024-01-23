@@ -24,6 +24,7 @@ Project to experiment with Bnd.
 
 This repository contains several projects that are my experiments with link:https://bnd.bndtools.org/[Bnd] and with other projects using those tools.
 
+* Run the link:run-bnd-cli-with-jbang/[bnd cli with Jbang]
 * Experiments with the link:https://github.com/bndtools/bnd/blob/master/biz.aQute.bnd.gradle/README.md[Bnd Gradle Plugin] used in non-Bnd Workspace Builds.
 ** link:lorem-bundle/[Lorem bundle] a simple bundle
 ** link:ipsum-bundle/[Ipsum bundle] a bundle that uses annotations (`@Component`, `@Export`)
