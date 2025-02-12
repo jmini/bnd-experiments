@@ -11,7 +11,7 @@ It is published on Maven Central:
     <artifactId>biz.aQute.bnd</artifactId>
     <version>${bnd-version}</version>
 </dependency>
----
+----
 
 
 === First example with jbang and version 6.4.0
@@ -60,6 +60,6 @@ jbang alias add --name bnd biz.aQute.bnd:biz.aQute.bnd:RELEASE
 Then `jbang bnd version` will return (at time of writing):
 
 [source, shell]
----
+----
 6.4.0.202211291949
----
+----
