@@ -1,0 +1,25 @@
+dependencies {
+    implementation project(':abundle-api')
+    runtimeOnly project(':abundle-impl')
+
+    implementation libs.junit.jupiter.api
+    runtimeOnly libs.junit.jupiter.engine
+    runtimeOnly libs.junit.platform.launcher
+    implementation libs.assertj.core
+
+    implementation libs.org.osgi.test.junit5
+    implementation libs.org.eclipse.osgi
+}
+
+def resolve = tasks.register('resolve', aQute.bnd.gradle.Resolve) {
+    bndrun = project.file('test.bndrun')
+}
+
+def testOSGi = tasks.register('testOSGi', aQute.bnd.gradle.TestOSGi) {
+    dependsOn resolve
+    bndrun = project.file('test.bndrun')
+}
+
+tasks.named('check') {
+    dependsOn testOSGi
+}

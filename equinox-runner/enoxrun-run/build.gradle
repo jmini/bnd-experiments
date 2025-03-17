@@ -1,0 +1,35 @@
+configurations {
+    fixtureCfg1
+}
+
+dependencies {
+    api project(':abundle-api')
+    testRuntimeOnly project(':abundle-impl')
+
+    api libs.org.eclipse.osgi
+    implementation libs.slf4j.api
+
+    testImplementation libs.junit.jupiter.api
+    testRuntimeOnly libs.junit.jupiter.engine
+    testRuntimeOnly libs.junit.platform.launcher
+    testImplementation libs.assertj.core
+
+    testImplementation libs.org.eclipse.osgi
+}
+
+test {
+    useJUnitPlatform()
+    // jvmArgs=["-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"]
+}
+
+ext.genOutputDir = file("$buildDir/generated/test-resources")
+
+task generateTestResources {
+    ext.output1File = file("$genOutputDir/fixtureCfg1.txt")
+    outputs.file(output1File)
+    doLast {
+        output1File.text = configurations.fixtureCfg1.resolve().join('\n')
+    }
+}
+
+sourceSets.test.output.dir genOutputDir, builtBy: generateTestResources

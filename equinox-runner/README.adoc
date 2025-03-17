@@ -1,0 +1,3 @@
+= enoxrun
+
+Test to run Equinox

@@ -1,0 +1,17 @@
+dependencies {
+    api project( ':abundle-api')
+    compileOnly libs.org.osgi.service.component.annotations
+    
+    //Bundles mentioned in 'start-osgi.txt' (enoxrun will start those), so they need to be on the runtime classpath:
+    runtimeOnly libs.org.apache.felix.scr
+    runtimeOnly libs.org.osgi.util.function
+    runtimeOnly libs.org.osgi.util.promise
+}
+
+jar {
+  bundle {
+    bnd("Bundle-Name": "ABundle Impl",
+        "Bundle-SymbolicName" : "abundle.impl"
+      )
+  }
+}
